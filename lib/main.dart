@@ -1,7 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'notification_service.dart';
 import 'registration_page.dart';
 
-void main() {
+Future<void> main() async {
+  // 1. Готовим Flutter к работе с плагинами до запуска приложения
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // 2. Подключаемся к Firebase (настройки берутся из google-services.json)
+  await Firebase.initializeApp();
+
+  // 3. Включаем уведомления (разрешение, токен, слушатель push)
+  await NotificationService.init();
+
+  // 4. Запускаем приложение
   runApp(const MyApp());
 }
 
